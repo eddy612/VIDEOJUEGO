@@ -1,0 +1,60 @@
+/* Fondo responsivo mostrando la imagen completa */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url("portada.png") no-repeat center center;
+  background-size: contain;    /* 🔑 muestra la imagen completa sin recortarla */
+  background-color: #000;      /* Color de relleno en caso de que sobre espacio */
+  background-attachment: fixed;
+  font-family: 'Georgia', serif;
+  position: relative;
+}
+
+/* Contenedor de los botones */
+.overlay {
+  position: absolute;
+  top: 55%;   /* Ajusta la posición vertical según dónde quieras los botones */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Botones */
+.btn {
+  display: block;
+  width: 220px;
+  margin: 12px auto;
+  padding: 15px;
+  font-size: 1.3em;
+  color: #000;
+  background: #d4a038;
+  border: 3px solid #5c3d00;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
+
+/* 📱 Ajustes móviles */
+@media (max-width: 768px) {
+  .btn {
+    width: 180px;
+    font-size: 1.1em;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    width: 150px;
+    font-size: 1em;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  background: url("niveles.png") no-repeat center center;
+  background-size: contain;   /* Mantiene la imagen completa */
+  background-color: #000;
+}
+
+.menu-niveles {
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 5px #000;
+}
+
+/* Contenedor con fondo semitransparente */
+.contenedor {
+  background: rgba(200, 200, 200, 0.6);
+  padding: 25px 40px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 120px; 
+}
+
+/* Caja negra sólida para subtítulo */
+.subtitulo-box {
+  background: black;
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.subtitulo {
+  font-size: 1.5em;
+  margin: 0;
+  color: white;
+}
+
+/* Botones organizados */
+.niveles {
+  display: grid;
+  grid-template-columns: repeat(2, 160px);
+  gap: 15px 25px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Botones */
+.btn {
+  padding: 15px;
+  font-size: 1.1em;
+  width: 160px;
+  margin: auto;
+  color: #000;
+  background: #e3e3e3;
+  border: 3px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #ccc;
+  transform: scale(1.05);
+}
+
+/* Botón volver más ancho */
+.volver {
+  width: 350px;
+  margin-top: 15px;
+}
