@@ -8,24 +8,55 @@
 </head>
 <body>
   <div class="menu-niveles">
-
-    <!-- Contenedor con fondo semitransparente -->
-    <div class="contenedor">
-      <div class="subtitulo-box">
-        <h2 class="subtitulo">SELECCIÓN DE NIVEL</h2>
-      </div>
-
-      <div class="niveles">
-        <button class="btn" onclick="nivel(1)">NIVEL 1</button>
-        <button class="btn" onclick="nivel(2)">NIVEL 2</button>
-        <button class="btn" onclick="nivel(3)">NIVEL 3</button>
-        <button class="btn" onclick="nivel(4)">NIVEL FINAL</button>
-      </div>
-
-      <button class="btn volver" onclick="volver()">VOLVER</button>
+    <div class="title-section">
+      <h1 class="page-title">SELECCIÓN DEL RITUAL</h1>
+      <div class="title-decoration">🔮</div>
     </div>
-    
+
+    <div class="contenedor-niveles">
+      <div class="subtitulo-box">
+        <h2 class="subtitulo">ELIEGE TU DESAFÍO</h2>
+      </div>
+
+      <div class="niveles-grid">
+        <div class="nivel-card" onclick="nivel(1)" onmouseenter="playHoverSound()">
+          <div class="nivel-icon">👁️</div>
+          <h3>NIVEL 1</h3>
+          <p>SOMBRAS ANCESTRALES</p>
+          <div class="nivel-desc">Memoria Básica</div>
+          <div class="nivel-status disponible">DISPONIBLE</div>
+        </div>
+
+        <div class="nivel-card bloqueado" onclick="nivel(2)" onmouseenter="playHoverSound()">
+          <div class="nivel-icon">⚔️</div>
+          <h3>NIVEL 2</h3>
+          <p>CRIPTA MALDITA</p>
+          <div class="nivel-desc">Memoria Intermedia</div>
+          <div class="nivel-status bloqueado">BLOQUEADO</div>
+        </div>
+
+        <div class="nivel-card bloqueado" onclick="nivel(3)" onmouseenter="playHoverSound()">
+          <div class="nivel-icon">🐉</div>
+          <h3>NIVEL 3</h3>
+          <p>ABISMO ETERNO</p>
+          <div class="nivel-desc">Memoria Avanzada</div>
+          <div class="nivel-status bloqueado">BLOQUEADO</div>
+        </div>
+
+        <div class="nivel-card bloqueado" onclick="nivel(4)" onmouseenter="playHoverSound()">
+          <div class="nivel-icon">👑</div>
+          <h3>NIVEL FINAL</h3>
+          <p>TRONO DE SOMBRAS</p>
+          <div class="nivel-desc">Memoria Maestra</div>
+          <div class="nivel-status bloqueado">BLOQUEADO</div>
+        </div>
+      </div>
+
+      <button class="btn volver" onclick="volver()" onmouseenter="playHoverSound()">← VOLVER AL SANTUARIO</button>
+    </div>
   </div>
+
+  <div class="particles"></div>
 
   <script src="niveles.js"></script>
 </body>

@@ -7,12 +7,20 @@
   <link rel="stylesheet" href="nivel1.css">
 </head>
 <body>
-  <div class="container">
-    <img src="portada-niveles.png" alt="Fondo nivel">
-    <div class="cover"></div>
-    <div class="custom-text">
+  <div class="game-container">
+    <div class="game-header">
       <span id="tiempo">TIEMPO: 60</span>
-      <span id="nivel">NIVEL: 1</span>
+      <span id="nivel">NIVEL: 1 - SOMBRAS ANCESTRALES</span>
+      <span id="pares">PAREJAS: 0/6</span>
+    </div>
+    
+    <div class="memory-game" id="memory-game">
+      <!-- Las cartas se generarán dinámicamente con JavaScript -->
+    </div>
+    
+    <div class="game-controls">
+      <button class="btn reiniciar" onclick="reiniciarNivel()" onmouseenter="playHoverSound()">RITUAL DE NUEVO</button>
+      <button class="btn volver" onclick="volver()" onmouseenter="playHoverSound()">VOLVER AL SANTUARIO</button>
     </div>
   </div>
 

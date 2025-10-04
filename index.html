@@ -8,10 +8,36 @@
 </head>
 <body>
   <div class="overlay">
-    <button class="btn" onclick="jugar()">JUGAR</button>
-    <button class="btn" onclick="opciones()">OPCIONES</button>
-    <button class="btn" onclick="salir()">SALIR</button>
+    <div class="title-container">
+      <h1 class="main-title">GUARDIANES</h1>
+      <h2 class="sub-title">DE LA MEMORIA</h2>
+      <div class="title-decoration">⚔️</div>
+    </div>
+    
+    <div class="menu-buttons">
+      <button class="btn jugar" onclick="jugar()" onmouseenter="playHoverSound()">INICIAR RITUAL</button>
+      <button class="btn opciones" onclick="opciones()" onmouseenter="playHoverSound()">CRÓNICAS</button>
+      <button class="btn salir" onclick="salir()" onmouseenter="playHoverSound()">ABANDONAR</button>
+    </div>
+    
+    <div class="lore-text">
+      <p>"En los reinos olvidados, donde las sombras susurran secretos ancestrales,<br> 
+      solo aquellos con memoria inquebrantable pueden restaurar el equilibrio..."</p>
+    </div>
   </div>
+
+  <div class="particles"></div>
+
+  <!-- Audio elements -->
+  <audio id="hoverSound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
+  </audio>
+  <audio id="clickSound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
+  </audio>
+  <audio id="backgroundMusic" loop preload="auto">
+    <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
+  </audio>
 
   <script src="script.js"></script>
 </body>

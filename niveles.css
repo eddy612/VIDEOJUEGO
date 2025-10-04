@@ -1,77 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700;900&family=UnifrakturMaguntia&display=swap');
+
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  width: 100vw;
+  background: 
+    radial-gradient(circle at 30% 20%, #1a0a1a 0%, #0d0613 50%, #050308 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grit" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="0.5" fill="%23000" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23grit)"/></svg>');
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Cinzel', serif;
+  color: #e0d3b8;
+  position: relative;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Georgia', serif;
-  background: url("niveles.png") no-repeat center center;
-  background-size: contain;   /* Mantiene la imagen completa */
-  background-color: #000;
+}
+
+/* Efecto de partículas */
+.particles::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 70% 30%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 30% 70%, rgba(218, 165, 32, 0.1) 0%, transparent 50%);
+  animation: particleMove 15s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes particleMove {
+  0%, 100% { transform: translateX(0px) scale(1); }
+  50% { transform: translateX(20px) scale(1.1); }
 }
 
 .menu-niveles {
   text-align: center;
-  color: white;
-  text-shadow: 2px 2px 5px #000;
+  width: 95%;
+  max-width: 1200px;
+  padding: 20px;
 }
 
-/* Contenedor con fondo semitransparente */
-.contenedor {
-  background: rgba(200, 200, 200, 0.6);
-  padding: 25px 40px;
-  border-radius: 12px;
-  display: inline-block;
-  margin-top: 120px; 
+/* Título de la página */
+.title-section {
+  margin-bottom: 40px;
 }
 
-/* Caja negra sólida para subtítulo */
+.page-title {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 3.5rem;
+  color: #daa520;
+  text-shadow: 
+    0 0 20px rgba(218, 165, 32, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+}
+
+.title-decoration {
+  font-size: 2.5rem;
+  opacity: 0.7;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Contenedor principal */
+.contenedor-niveles {
+  background: 
+    radial-gradient(circle at center, rgba(26, 10, 26, 0.8) 0%, rgba(13, 6, 19, 0.9) 100%),
+    linear-gradient(135deg, transparent 0%, rgba(139, 0, 0, 0.1) 100%);
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 2px solid #5d1919;
+  box-shadow: 
+    0 0 40px rgba(139, 0, 0, 0.2),
+    inset 0 0 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  backdrop-filter: blur(5px);
+}
+
+.contenedor-niveles::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #8b0000, #5d1919, #2c0410, #8b0000);
+  border-radius: 22px;
+  z-index: -1;
+  animation: borderPulse 4s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.9; }
+}
+
+/* Subtítulo */
 .subtitulo-box {
-  background: black;
+  background: linear-gradient(135deg, #2c0410 0%, #5d1919 100%);
   display: inline-block;
-  padding: 6px 20px;
-  border-radius: 6px;
-  margin-bottom: 20px;
+  padding: 12px 35px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  border: 2px solid #daa520;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .subtitulo {
-  font-size: 1.5em;
+  font-size: 1.8em;
   margin: 0;
-  color: white;
+  color: #e0d3b8;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 3px;
+  font-weight: 700;
 }
 
-/* Botones organizados */
-.niveles {
+/* Grid de niveles */
+.niveles-grid {
   display: grid;
-  grid-template-columns: repeat(2, 160px);
-  gap: 15px 25px;
-  justify-content: center;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
 }
 
-/* Botones */
-.btn {
-  padding: 15px;
-  font-size: 1.1em;
-  width: 160px;
-  margin: auto;
-  color: #000;
-  background: #e3e3e3;
-  border: 3px solid #333;
-  border-radius: 8px;
+/* Tarjetas de nivel */
+.nivel-card {
+  background: linear-gradient(135deg, #2c0410 0%, #3a1f1f 100%);
+  padding: 25px 20px;
+  border-radius: 15px;
+  border: 2px solid #8b4513;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.nivel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.nivel-card:hover::before {
+  left: 100%;
+}
+
+.nivel-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: #daa520;
+  box-shadow: 
+    0 10px 30px rgba(139, 0, 0, 0.3),
+    0 0 20px rgba(218, 165, 32, 0.2);
+}
+
+.nivel-card.bloqueado {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #1a0a1a 0%, #2c0410 100%);
+  border-color: #5d1919;
+}
+
+.nivel-card.bloqueado:hover {
+  transform: none;
+  border-color: #5d1919;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.nivel-icon {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.nivel-card h3 {
+  font-size: 1.5em;
+  color: #daa520;
+  margin: 0 0 8px 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.nivel-card p {
+  font-size: 1.1em;
+  color: #e0d3b8;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nivel-desc {
+  font-size: 0.9em;
+  color: #b8a993;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.nivel-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.disponible {
+  background: linear-gradient(135deg, #0d3d0d 0%, #1a5c1a 100%);
+  color: #90ee90;
+  border: 1px solid #32cd32;
+}
+
+.bloqueado {
+  background: linear-gradient(135deg, #3d0d0d 0%, #5c1a1a 100%);
+  color: #ee9090;
+  border: 1px solid #cd3232;
+}
+
+/* Botón volver */
+.btn {
+  padding: 15px 40px;
+  font-size: 1.2em;
+  background: linear-gradient(135deg, #2c0410 0%, #5d1919 100%);
+  color: #e0d3b8;
+  border: 2px solid #8b4513;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover {
-  background: #ccc;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #5d1919 0%, #8b0000 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+  border-color: #daa520;
 }
 
-/* Botón volver más ancho */
-.volver {
-  width: 350px;
-  margin-top: 15px;
+/* Responsive */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .niveles-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .contenedor-niveles {
+    padding: 30px 20px;
+  }
+  
+  .subtitulo {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .niveles-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .nivel-card {
+    padding: 20px 15px;
+  }
+  
+  .nivel-icon {
+    font-size: 3rem;
+  }
+  
+  .btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+  }
 }
