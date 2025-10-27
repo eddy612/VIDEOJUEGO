@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nivel 1 - Guardianes de la Memoria</title>
-  <link rel="stylesheet" href="nivel1.css">
+  <title>Nivel 2 - Guardianes de la Memoria</title>
+  <link rel="stylesheet" href="nivel2.css">
 </head>
 <body>
   <div class="game-container">
     <div class="game-header">
-      <span id="tiempo">TIEMPO: 60</span>
-      <span id="nivel">NIVEL: 1 - SOMBRAS ANCESTRALES</span>
-      <span id="pares">PAREJAS: 0/6</span>
+      <span id="tiempo">TIEMPO: 75</span>
+      <span id="nivel">NIVEL: 2 - CRIPTA MALDITA</span>
+      <span id="pares">PAREJAS: 0/8</span>
+    </div>
+    
+    <div class="game-info">
+      <div class="efecto-activo" id="efecto-activo"></div>
     </div>
     
     <div class="memory-game" id="memory-game">
@@ -29,11 +33,14 @@
   <audio id="clickSound" src="sounds/Click.mp3" preload="auto"></audio>
   <audio id="cardFlipSound" src="sounds/card-flip.mp3" preload="auto"></audio>
   <audio id="cardMatchSound" src="sounds/card-match.mp3" preload="auto"></audio>
-  <audio id="dragonRoarSound" src="sounds/Dragon.mp3" preload="auto"></audio>
+  <audio id="spiderSound" src="sounds/spider.mp3" preload="auto"></audio>
+  <audio id="skullSound" src="sounds/skull.mp3" preload="auto"></audio>
+  <audio id="moonSound" src="sounds/moon.mp3" preload="auto"></audio>
+  <audio id="fireSound" src="sounds/fire.mp3" preload="auto"></audio>
   <audio id="levelCompleteSound" src="sounds/level-complete.mp3" preload="auto"></audio>
   <audio id="timeWarningSound" src="sounds/time-warning.mp3" preload="auto"></audio>
   <audio id="timeUpSound" src="sounds/time-up.mp3" preload="auto"></audio>
 
-  <script src="nivel1.js"></script>
+  <script src="nivel2.js"></script>
 </body>
 </html>

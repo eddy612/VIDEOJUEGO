@@ -67,18 +67,31 @@ function playClickSound() {
 function nivel(n) {
   playClickSound();
   
-  if (n === 1) {
-    // Efecto de transición
-    document.body.style.opacity = '0.7';
-    setTimeout(() => {
-      window.location.href = "nivel1.html";
-    }, 300);
-  } else {
-    SoundSystem.playError();
-    setTimeout(() => {
-      alert("🔮 Este ritual aún duerme en las tinieblas...\n\nCompleta el nivel anterior para desbloquear nuevos desafíos.");
-    }, 200);
-  }
+  // Efecto de transición
+  document.body.style.opacity = '0.7';
+  
+  setTimeout(() => {
+    switch(n) {
+      case 1:
+        window.location.href = "nivel1.html";
+        break;
+      case 2:
+        window.location.href = "nivel2.html";
+        break;
+      case 3:
+        window.location.href = "nivel3.html";
+        break;
+      case 4:
+        SoundSystem.playError();
+        setTimeout(() => {
+          alert("🔮 Este ritual aún duerme en las tinieblas...\n\nEl Trono de Sombras aguarda a que los niveles anteriores sean conquistados.");
+        }, 200);
+        document.body.style.opacity = '1';
+        break;
+      default:
+        window.location.href = "nivel1.html";
+    }
+  }, 300);
 }
 
 function volver() {

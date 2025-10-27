@@ -1,24 +1,29 @@
-let tiempo = 60;
-let nivel = 1;
+let tiempo = 75;
+let nivel = 2;
 let paresEncontrados = 0;
-let totalPares = 6;
+let totalPares = 8;
 let cartasVolteadas = [];
 let puedeVoltear = true;
 let intervalo;
+let efectoActivo = false;
 
 const tiempoSpan = document.getElementById("tiempo");
 const nivelSpan = document.getElementById("nivel");
 const paresSpan = document.getElementById("pares");
 const memoryGame = document.getElementById("memory-game");
+const efectoActivoDiv = document.getElementById("efecto-activo");
 
-// Sistema de sonidos con archivos de audio reales
+// Sistema de sonidos
 const SoundSystem = {
   sounds: {
     hover: null,
     click: null,
     cardFlip: null,
     cardMatch: null,
-    dragonRoar: null,
+    spider: null,
+    skull: null,
+    moon: null,
+    fire: null,
     levelComplete: null,
     timeWarning: null,
     timeUp: null
@@ -30,15 +35,19 @@ const SoundSystem = {
     this.sounds.click = document.getElementById('clickSound');
     this.sounds.cardFlip = document.getElementById('cardFlipSound');
     this.sounds.cardMatch = document.getElementById('cardMatchSound');
-    this.sounds.dragonRoar = document.getElementById('dragonRoarSound');
+    this.sounds.spider = document.getElementById('spiderSound');
+    this.sounds.skull = document.getElementById('skullSound');
+    this.sounds.moon = document.getElementById('moonSound');
+    this.sounds.fire = document.getElementById('fireSound');
     this.sounds.levelComplete = document.getElementById('levelCompleteSound');
     this.sounds.timeWarning = document.getElementById('timeWarningSound');
     this.sounds.timeUp = document.getElementById('timeUpSound');
     
     // Configurar volúmenes
-    if (this.sounds.dragonRoar) this.sounds.dragonRoar.volume = 0.7;
-    if (this.sounds.levelComplete) this.sounds.levelComplete.volume = 0.6;
-    if (this.sounds.timeUp) this.sounds.timeUp.volume = 0.5;
+    if (this.sounds.spider) this.sounds.spider.volume = 0.6;
+    if (this.sounds.skull) this.sounds.skull.volume = 0.7;
+    if (this.sounds.moon) this.sounds.moon.volume = 0.5;
+    if (this.sounds.fire) this.sounds.fire.volume = 0.6;
   },
   
   playHover() {
@@ -57,8 +66,20 @@ const SoundSystem = {
     this.playSound(this.sounds.cardMatch);
   },
   
-  playDragonRoar() {
-    this.playSound(this.sounds.dragonRoar);
+  playSpider() {
+    this.playSound(this.sounds.spider);
+  },
+  
+  playSkull() {
+    this.playSound(this.sounds.skull);
+  },
+  
+  playMoon() {
+    this.playSound(this.sounds.moon);
+  },
+  
+  playFire() {
+    this.playSound(this.sounds.fire);
   },
   
   playLevelComplete() {
@@ -83,11 +104,31 @@ const SoundSystem = {
   }
 };
 
-// Símbolos Dark Fantasy (6 pares)
-const simbolos = [
-  '👁️', '⚔️', '🛡️', '🏰', '🐉', '👑',
-  '👁️', '⚔️', '🛡️', '🏰', '🐉', '👑'
+// Símbolos Nivel 2 con cartas especiales
+const simbolosNivel2 = [
+  '👁️', '⚔️', '🛡️', '🏰', '🐉', '👑', '🕷️', '💀',
+  '👁️', '⚔️', '🛡️', '🏰', '🐉', '👑', '🕷️', '💀'
 ];
+
+// Cartas especiales y sus efectos
+const cartasEspeciales = {
+  '🕷️': {
+    nombre: 'Araña del Caos',
+    efecto: function() {
+      mostrarEfectoActivo('🕷️ Araña del Caos: ¡Las cartas se mezclan!');
+      SoundSystem.playSpider();
+      mezclarTableroVisualmente();
+    }
+  },
+  '💀': {
+    nombre: 'Calavera Maldita',
+    efecto: function() {
+      mostrarEfectoActivo('💀 Calavera Maldita: ¡Cartas volteadas!');
+      SoundSystem.playSkull();
+      voltearCartasAleatorias(2);
+    }
+  }
+};
 
 function playHoverSound() {
   SoundSystem.playHover();
@@ -105,11 +146,15 @@ function mezclarArray(array) {
 // Crear el tablero de juego
 function crearTablero() {
   memoryGame.innerHTML = '';
-  const simbolosMezclados = mezclarArray([...simbolos]);
+  const simbolosMezclados = mezclarArray([...simbolosNivel2]);
   
   simbolosMezclados.forEach(simbolo => {
     const card = document.createElement('div');
     card.classList.add('card');
+    
+    if (simbolo === '🕷️' || simbolo === '💀') {
+      card.classList.add('especial');
+    }
     
     card.innerHTML = `
       <div class="front">${simbolo}</div>
@@ -123,7 +168,7 @@ function crearTablero() {
 
 // Voltear carta
 function voltearCarta(card, simbolo) {
-  if (!puedeVoltear || card.classList.contains('flipped') || card.classList.contains('encontrada')) {
+  if (!puedeVoltear || card.classList.contains('flipped') || card.classList.contains('encontrada') || efectoActivo) {
     return;
   }
   
@@ -142,61 +187,48 @@ function verificarPar() {
   const [carta1, carta2] = cartasVolteadas;
   
   if (carta1.simbolo === carta2.simbolo) {
-    // Par encontrado - Éxito
+    // Par encontrado
     SoundSystem.playCardMatch();
-    SoundSystem.playDragonRoar();
     
-    // CAMBIAR COLOR A GRIS PARA INDICAR QUE YA FUE ENCONTRADA
-    carta1.card.style.background = 'linear-gradient(135deg, #666666 0%, #999999 100%)';
-    carta2.card.style.background = 'linear-gradient(135deg, #666666 0%, #999999 100%)';
-    carta1.card.classList.add('encontrada');
-    carta2.card.classList.add('encontrada');
-    
-    paresEncontrados++;
-    paresSpan.textContent = `PAREJAS: ${paresEncontrados}/${totalPares}`;
-    
-    // Efecto visual
-    carta1.card.style.animation = 'dragonSuccess 0.8s ease-in-out';
-    carta2.card.style.animation = 'dragonSuccess 0.8s ease-in-out';
-    
-    // Efecto de fuego/resplandor de dragón
-    const fireEffect = document.createElement('div');
-    fireEffect.style.cssText = `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,100,0,0.4) 0%, rgba(255,50,0,0.3) 30%, transparent 70%);
-      border-radius: 50%;
-      animation: dragonFire 0.8s ease-out;
-      pointer-events: none;
-      z-index: 10;
-    `;
-    document.body.appendChild(fireEffect);
-    setTimeout(() => fireEffect.remove(), 800);
-    
-    setTimeout(() => {
-      carta1.card.style.animation = '';
-      carta2.card.style.animation = '';
-    }, 800);
-    
-    cartasVolteadas = [];
-    puedeVoltear = true;
-    
-    // Verificar si completó el nivel
-    if (paresEncontrados === totalPares) {
-      clearInterval(intervalo);
-      SoundSystem.playLevelComplete();
-      setTimeout(() => SoundSystem.playDragonRoar(), 500);
+    // Verificar si es una carta especial
+    if (cartasEspeciales[carta1.simbolo]) {
+      efectoActivo = true;
+      
+      // MARCAR COMO ENCONTRADAS (GRIS)
+      carta1.card.style.background = 'linear-gradient(135deg, #666666 0%, #999999 100%)';
+      carta2.card.style.background = 'linear-gradient(135deg, #666666 0%, #999999 100%)';
+      carta1.card.classList.add('encontrada');
+      carta2.card.classList.add('encontrada');
+      
+      paresEncontrados++;
+      paresSpan.textContent = `PAREJAS: ${paresEncontrados}/${totalPares}`;
+      
+      // APLICAR EL EFECTO ESPECIAL
       setTimeout(() => {
-        const mensaje = `🐉 ¡EL DRAGÓN ANCESTRAL DESPIERTA! 🐉\n\nHas completado el Nivel ${nivel}\n⏱️ Tiempo restante: ${tiempo} segundos\n🏆 Parejas encontradas: ${paresEncontrados}/${totalPares}\n\nEl gran dragón observa tu destreza con aprobación...`;
-        alert(mensaje);
-      }, 1500);
+        cartasEspeciales[carta1.simbolo].efecto();
+        
+        setTimeout(() => {
+          cartasVolteadas = [];
+          puedeVoltear = true;
+          efectoActivo = false;
+          verificarNivelCompletado();
+        }, 1000);
+      }, 500);
+    } else {
+      // Carta normal - MARCAR COMO ENCONTRADAS (GRIS)
+      carta1.card.style.background = 'linear-gradient(135deg, #666666 0%, #999999 100%)';
+      carta2.card.style.background = 'linear-gradient(135deg, #666666 0%, #999999 100%)';
+      carta1.card.classList.add('encontrada');
+      carta2.card.classList.add('encontrada');
+      
+      paresEncontrados++;
+      paresSpan.textContent = `PAREJAS: ${paresEncontrados}/${totalPares}`;
+      cartasVolteadas = [];
+      puedeVoltear = true;
+      verificarNivelCompletado();
     }
   } else {
-    // No es par - Fracaso
+    // No es par
     setTimeout(() => {
       carta1.card.style.animation = 'shake 0.5s ease-in-out';
       carta2.card.style.animation = 'shake 0.5s ease-in-out';
@@ -214,10 +246,56 @@ function verificarPar() {
   }
 }
 
+// Efectos especiales
+function mezclarTableroVisualmente() {
+  const cards = document.querySelectorAll('.card:not(.encontrada)');
+  cards.forEach(card => {
+    card.style.animation = 'mezclar 0.8s ease-in-out';
+  });
+  
+  setTimeout(() => {
+    cards.forEach(card => {
+      card.style.animation = '';
+    });
+  }, 800);
+}
+
+function voltearCartasAleatorias(cantidad) {
+  const cards = Array.from(document.querySelectorAll('.card.flipped:not(.encontrada)'));
+  const cartasParaVoltear = cards.sort(() => 0.5 - Math.random()).slice(0, cantidad);
+  
+  cartasParaVoltear.forEach(card => {
+    setTimeout(() => {
+      card.classList.remove('flipped');
+    }, 300);
+  });
+}
+
+function mostrarEfectoActivo(mensaje) {
+  efectoActivoDiv.textContent = mensaje;
+  efectoActivoDiv.classList.add('mostrar');
+  
+  setTimeout(() => {
+    efectoActivoDiv.classList.remove('mostrar');
+  }, 2000);
+}
+
+function verificarNivelCompletado() {
+  if (paresEncontrados === totalPares) {
+    clearInterval(intervalo);
+    SoundSystem.playLevelComplete();
+    
+    setTimeout(() => {
+      const mensaje = `🔮 ¡LA CRIPTA MALDITA HA SIDO PURIFICADA! 🔮\n\nHas completado el Nivel ${nivel}\n⏱️ Tiempo restante: ${tiempo} segundos\n🏆 Parejas encontradas: ${paresEncontrados}/${totalPares}\n\nLos espíritus ancestrales te observan con respeto...`;
+      alert(mensaje);
+    }, 1000);
+  }
+}
+
 // Iniciar temporizador
 function iniciarTemporizador() {
   clearInterval(intervalo);
-  tiempo = 60;
+  tiempo = 75;
   tiempoSpan.textContent = `TIEMPO: ${tiempo}`;
   tiempoSpan.style.color = '#e0d3b8';
   tiempoSpan.style.animation = '';
@@ -227,11 +305,11 @@ function iniciarTemporizador() {
       tiempo--;
       tiempoSpan.textContent = `TIEMPO: ${tiempo}`;
       
-      if (tiempo === 10) {
+      if (tiempo === 15) {
         SoundSystem.playTimeWarning();
       }
       
-      if (tiempo <= 10) {
+      if (tiempo <= 15) {
         tiempoSpan.style.color = '#ff4444';
         tiempoSpan.style.animation = tiempoSpan.style.animation ? '' : 'pulse 1s infinite';
       } else if (tiempo <= 30) {
@@ -242,7 +320,7 @@ function iniciarTemporizador() {
       tiempoSpan.style.color = '#ff4444';
       SoundSystem.playTimeUp();
       setTimeout(() => {
-        alert("⏳ ¡EL TIEMPO SE AGOTÓ!\n\nLas sombras reclaman su territorio...\nEl ritual debe comenzar de nuevo.");
+        alert("⏳ ¡EL TIEMPO SE AGOTÓ!\n\nLa cripta te ha absorbido...\nEl ritual debe comenzar de nuevo.");
         reiniciarNivel();
       }, 500);
     }
@@ -252,15 +330,17 @@ function iniciarTemporizador() {
 // Reiniciar nivel
 function reiniciarNivel() {
   SoundSystem.playClick();
-  tiempo = 60;
+  tiempo = 75;
   paresEncontrados = 0;
   cartasVolteadas = [];
   puedeVoltear = true;
+  efectoActivo = false;
   
   tiempoSpan.textContent = `TIEMPO: ${tiempo}`;
   tiempoSpan.style.color = '#e0d3b8';
   tiempoSpan.style.animation = '';
   paresSpan.textContent = `PAREJAS: ${paresEncontrados}/${totalPares}`;
+  efectoActivoDiv.classList.remove('mostrar');
   
   crearTablero();
   iniciarTemporizador();
@@ -301,21 +381,6 @@ style.textContent = `
     }
   }
   
-  @keyframes dragonFire {
-    0% { 
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.1);
-    }
-    50% { 
-      opacity: 0.8;
-      transform: translate(-50%, -50%) scale(1.5);
-    }
-    100% { 
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(2);
-    }
-  }
-  
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
@@ -332,7 +397,7 @@ document.head.appendChild(style);
 // Inicializar juego
 function iniciarJuego() {
   SoundSystem.init();
-  nivelSpan.textContent = "NIVEL: 1 - SOMBRAS ANCESTRALES";
+  nivelSpan.textContent = "NIVEL: 2 - CRIPTA MALDITA";
   paresSpan.textContent = `PAREJAS: ${paresEncontrados}/${totalPares}`;
   crearTablero();
   iniciarTemporizador();

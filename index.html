@@ -15,7 +15,7 @@
     </div>
     
     <div class="menu-buttons">
-      <button class="btn jugar" onclick="jugar()" onmouseenter="playHoverSound()">INICIAR    RITUAL</button>
+      <button class="btn jugar" onclick="jugar()" onmouseenter="playHoverSound()">INICIAR RITUAL</button>
       <button class="btn opciones" onclick="opciones()" onmouseenter="playHoverSound()">CRÓNICAS</button>
       <button class="btn salir" onclick="salir()" onmouseenter="playHoverSound()">ABANDONAR</button>
     </div>
@@ -24,20 +24,18 @@
       <p>"En los reinos olvidados, donde las sombras susurran secretos ancestrales,<br> 
       solo aquellos con memoria inquebrantable pueden restaurar el equilibrio..."</p>
     </div>
+
+    <div class="music-indicator">
+      <p>🎵 Música épica activa | Presiona 'M' para silenciar</p>
+    </div>
   </div>
 
   <div class="particles"></div>
 
-  <!-- Audio elements -->
-  <audio id="hoverSound" preload="auto">
-    <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
-  </audio>
-  <audio id="clickSound" preload="auto">
-    <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
-  </audio>
-  <audio id="backgroundMusic" loop preload="auto">
-    <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
-  </audio>
+  <!-- Audio elements para archivos reales -->
+  <audio id="hoverSound" src="sounds/hover.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="sounds/Click.mp3" preload="auto"></audio>
+  <audio id="backgroundMusic" src="sounds/Menu.mp3" loop preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
