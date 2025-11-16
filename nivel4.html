@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nivel 4 - Guardianes de la Memoria</title>
+  <link rel="stylesheet" href="nivel4.css">
+</head>
+<body>
+  <div class="game-container">
+    <div class="game-header">
+      <span id="tiempo">TIEMPO: 120</span>
+      <span id="nivel">NIVEL: 4 - TRONO DE SOMBRAS</span>
+      <span id="pares">PAREJAS: 0/12</span>
+    </div>
+    
+    <div class="game-info">
+      <div class="efecto-activo" id="efecto-activo"></div>
+      <div class="modo-activo" id="modo-activo">MODO: NORMAL</div>
+    </div>
+    
+    <div class="memory-game" id="memory-game">
+      <!-- Las cartas se generarán dinámicamente con JavaScript -->
+    </div>
+    
+    <div class="game-stats">
+      <div class="stat">Cartas Especiales: <span id="especiales-contador">0</span></div>
+      <div class="stat">Combo: <span id="combo-contador">0</span>x</div>
+      <div class="stat">Puntuación: <span id="puntuacion">0</span></div>
+    </div>
+    
+    <div class="game-controls">
+      <button class="btn reiniciar" onclick="reiniciarNivel()" onmouseenter="playHoverSound()">RITUAL DE NUEVO</button>
+      <button class="btn volver" onclick="volver()" onmouseenter="playHoverSound()">VOLVER AL SANTUARIO</button>
+    </div>
+  </div>
+
+  <script src="nivel4.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Over - Guardianes de la Memoria</title>
+  <link rel="stylesheet" href="gameOver.css">
+</head>
+<body>
+  <div class="game-over-container">
+    <div class="game-over-content">
+      <h1 class="game-over-title">💀 GAME OVER 💀</h1>
+      <div class="game-over-message" id="gameOverMessage">
+        El tiempo se ha agotado...
+      </div>
+      <div class="stats" id="stats">
+        <!-- Las estadísticas se llenarán con JavaScript -->
+      </div>
+      <div class="game-over-buttons">
+        <button class="btn reintentar" onclick="reintentar()">REINTENTAR</button>
+        <button class="btn menu" onclick="volverAlMenu()">MENÚ PRINCIPAL</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="gameOverSound" src="sounds/game-over.mp3" preload="auto"></audio>
+  <script src="gameOver.js"></script>
+</body>
+</html>

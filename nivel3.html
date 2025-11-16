@@ -16,7 +16,7 @@
     
     <div class="game-info">
       <div class="efecto-activo" id="efecto-activo"></div>
-      <div class="tiempo-extra" id="tiempo-extra">+0s</div>
+      <div class="tiempo-extra" id="tiempo-extra"></div>
     </div>
     
     <div class="memory-game" id="memory-game">
@@ -24,23 +24,25 @@
     </div>
     
     <div class="game-controls">
-      <button class="btn reiniciar" onclick="reiniciarNivel()" onmouseenter="playHoverSound()">RITUAL DE NUEVO</button>
-      <button class="btn volver" onclick="volver()" onmouseenter="playHoverSound()">VOLVER AL SANTUARIO</button>
+      <button class="btn reiniciar" onclick="reiniciarNivel()">RITUAL DE NUEVO</button>
+      <button class="btn volver" onclick="volver()">VOLVER AL SANTUARIO</button>
     </div>
   </div>
 
   <!-- Audio para efectos de sonido -->
-  <audio id="hoverSound" src="sounds/hover.mp3" preload="auto"></audio>
-  <audio id="clickSound" src="sounds/Click.mp3" preload="auto"></audio>
-  <audio id="cardFlipSound" src="sounds/card-flip.mp3" preload="auto"></audio>
-  <audio id="cardMatchSound" src="sounds/card-match.mp3" preload="auto"></audio>
-  <audio id="vortexSound" src="sounds/vortex.mp3" preload="auto"></audio>
-  <audio id="ghostSound" src="sounds/ghost.mp3" preload="auto"></audio>
-  <audio id="keySound" src="sounds/key.mp3" preload="auto"></audio>
-  <audio id="lightningSound" src="sounds/lightning.mp3" preload="auto"></audio>
-  <audio id="levelCompleteSound" src="sounds/level-complete.mp3" preload="auto"></audio>
-  <audio id="timeWarningSound" src="sounds/time-warning.mp3" preload="auto"></audio>
-  <audio id="timeUpSound" src="sounds/time-up.mp3" preload="auto"></audio>
+  <audio id="hoverSound" preload="auto"></audio>
+  <audio id="clickSound" preload="auto"></audio>
+  <audio id="cardFlipSound" preload="auto"></audio>
+  <audio id="cardMatchSound" preload="auto"></audio>
+  <audio id="vortexSound" preload="auto"></audio>
+  <audio id="ghostSound" preload="auto"></audio>
+  <audio id="keySound" preload="auto"></audio>
+  <audio id="lightningSound" preload="auto"></audio>
+  <audio id="timeSound" preload="auto"></audio>
+  <audio id="freezeSound" preload="auto"></audio>
+  <audio id="levelCompleteSound" preload="auto"></audio>
+  <audio id="timeWarningSound" preload="auto"></audio>
+  <audio id="timeUpSound" preload="auto"></audio>
 
   <script src="nivel3.js"></script>
 </body>

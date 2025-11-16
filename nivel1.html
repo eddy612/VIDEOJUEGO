@@ -19,20 +19,30 @@
     </div>
     
     <div class="game-controls">
-      <button class="btn reiniciar" onclick="reiniciarNivel()" onmouseenter="playHoverSound()">RITUAL DE NUEVO</button>
-      <button class="btn volver" onclick="volver()" onmouseenter="playHoverSound()">VOLVER AL SANTUARIO</button>
+      <button class="btn reiniciar" onclick="reiniciarNivel()">RITUAL DE NUEVO</button>
+      <button class="btn volver" onclick="volver()">VOLVER AL SANTUARIO</button>
     </div>
   </div>
 
-  <!-- Audio para efectos de sonido -->
-  <audio id="hoverSound" src="sounds/hover.mp3" preload="auto"></audio>
-  <audio id="clickSound" src="sounds/Click.mp3" preload="auto"></audio>
-  <audio id="cardFlipSound" src="sounds/card-flip.mp3" preload="auto"></audio>
-  <audio id="cardMatchSound" src="sounds/card-match.mp3" preload="auto"></audio>
-  <audio id="dragonRoarSound" src="sounds/Dragon.mp3" preload="auto"></audio>
-  <audio id="levelCompleteSound" src="sounds/level-complete.mp3" preload="auto"></audio>
-  <audio id="timeWarningSound" src="sounds/time-warning.mp3" preload="auto"></audio>
-  <audio id="timeUpSound" src="sounds/time-up.mp3" preload="auto"></audio>
+  <!-- Audio elements como fallback -->
+  <audio id="hoverSound" preload="auto"></audio>
+  <audio id="clickSound" preload="auto"></audio>
+  <audio id="cardFlipSound" preload="auto"></audio>
+  <audio id="cardMatchSound" preload="auto"></audio>
+  <audio id="dragonRoarSound" preload="auto"></audio>
+  <audio id="levelCompleteSound" preload="auto"></audio>
+  <audio id="timeWarningSound" preload="auto"></audio>
+  <audio id="timeUpSound" preload="auto"></audio>
+  <audio id="eyeSound" preload="auto"></audio>
+  <audio id="swordSound" preload="auto"></audio>
+  <audio id="shieldSound" preload="auto"></audio>
+  <audio id="castleSound" preload="auto"></audio>
+  <audio id="dragonSound" preload="auto"></audio>
+  <audio id="crownSound" preload="auto"></audio>
+  <audio id="errorMismatchSound" preload="auto"></audio>
+  <audio id="levelStartSound" preload="auto"></audio>
+  <audio id="restartSound" preload="auto"></audio>
+  <audio id="menuBackSound" preload="auto"></audio>
 
   <script src="nivel1.js"></script>
 </body>

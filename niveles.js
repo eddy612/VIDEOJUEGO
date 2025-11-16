@@ -64,6 +64,7 @@ function playClickSound() {
   SoundSystem.playClick();
 }
 
+// Agregar el caso para el nivel 4
 function nivel(n) {
   playClickSound();
   
@@ -82,11 +83,7 @@ function nivel(n) {
         window.location.href = "nivel3.html";
         break;
       case 4:
-        SoundSystem.playError();
-        setTimeout(() => {
-          alert("🔮 Este ritual aún duerme en las tinieblas...\n\nEl Trono de Sombras aguarda a que los niveles anteriores sean conquistados.");
-        }, 200);
-        document.body.style.opacity = '1';
+        window.location.href = "nivel4.html";
         break;
       default:
         window.location.href = "nivel1.html";

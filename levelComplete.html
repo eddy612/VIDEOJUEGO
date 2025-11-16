@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Victoria! - Guardianes de la Memoria</title>
+  <link rel="stylesheet" href="levelComplete.css">
+</head>
+<body>
+  <div class="victory-container">
+    <div class="victory-content">
+      <h1 class="victory-title">🎉 ¡VICTORIA! 🎉</h1>
+      <div class="victory-message" id="victoryMessage">
+        ¡Has completado el nivel!
+      </div>
+      <div class="stats" id="stats">
+        <!-- Las estadísticas se llenarán con JavaScript -->
+      </div>
+      <div class="victory-buttons">
+        <button class="btn siguiente" onclick="siguienteNivel()" id="siguienteBtn">SIGUIENTE NIVEL</button>
+        <button class="btn reintentar" onclick="reintentar()">REPETIR NIVEL</button>
+        <button class="btn menu" onclick="volverAlMenu()">MENÚ PRINCIPAL</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+  <div class="confetti"></div>
+
+  <audio id="victorySound" src="sounds/victory.mp3" preload="auto"></audio>
+  <script src="levelComplete.js"></script>
+</body>
+</html>
